@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Code Hamster</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="contact.css" />
+</head>
+
+<body>
+  <div>
+    <nav class="bg-purple">
+      <ul>
+        <li>
+          <a href="index.html">Home</a>
+        </li>
+        <li>
+          <a href="blog.html">Blog</a>
+        </li>
+        <li>
+          <a href="contact.html">Contact Us</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="text-center">
+    <img src="/images/CodeHamsterLogo.png" width="90" />
+    <header class="bg-purple">
+      <header class="bg-purple">
+        <h1 class="tc-white">Contact Hamster</h1>
+
+  </div>
+
+  <div>
+    <h2>We promise to respond in less than a sqweek!</h2>
+    </header>
+    <br>
+    <br>
+    <br>
+    <p>Have a question? Want to know what we think about something in particular? Why not send us an email?!</p>
+    <br>
+    <br>
+
+    <main>
+      <!--Create a form that on submission calls the function submitMessage-->
+      <form class="contact-form monospace" onsubmit="return submitMessage(event);">
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" required class="monospace">
+        <label for="fullName">Full Name</label>
+        <input type="text" name="fullName" id="fullName" required class="monospace">
+        <label for="feedbackType">Feedback Type</label>
+        <select name="feedback-type" id="feedbackType" class="monospace">
+          <option value="review" class="monospace">Reveiw</option>
+          <option value="submission" class="monospace">Idea Submission</option>
+          <option value="request" class="monospace">Make a Request</option>
+        </select>
+        <label for="message">Message</label>
+        <textarea name="message" id="message" rows="3" cols="30" placeholder="Leave your comment here"
+          required></textarea>
+
+        <button class="monospace">Clear</button>
+        <input type="submit" class="monospace">
+      </form>
+    </main>
+
+
+    <div class="text-center">
+      <br>
+      <br>
+      <br>
+      <h3 class="monospace">Review Messages</h3>
+      <dl id="currentMessages" class="monospace">
+      </dl>
+      <div>
+        <br>
+        <br>
+        <!--Button on click calls the function deleteMessages-->
+        <button class="monospace" onclick="deleteMessages();">Delete All</button>
+      </div>
+    </div>
+
+
+    <script>
+
+      function submitMessage(event) {
+        event.preventDefault();
+        const email = document.getElementById("email").value;
+        const fullName = document.getElementById("fullName").value;
+        const feedbackType = document.getElementById("feedbackType").value;
+        const message = document.getElementById("message").value;
+
+        const messageObject = {};
+        messageObject.email = email;
+        messageObject.fullName = fullName;
+        messageObject.feedbackType = feedbackType;
+        messageObject.message = message;
+
+        // Create an empty array - empty by default
+        let currentMessages = [];
+
+        if (window.localStorage.getItem("messages")) {
+          // If there are already existing messages, parse messages back into array
+          currentMessages = JSON.parse(window.localStorage.getItem("messages"));
+        }
+
+        // Append new message to array
+        currentMessages.push(messageObject);
+
+        // Add the messages into local storage
+        window.localStorage.setItem("messages", JSON.stringify(currentMessages));
+
+        renderMessages();
+
+        return false;
+      }
+      // Create a function to delete messages from local storage
+      function deleteMessages() {
+        window.localStorage.removeItem("messages");
+        renderMessages();
+      }
+
+      function renderMessages() {
+        let currentMessages = [];
+
+        if (window.localStorage.getItem("messages")) {
+          // There are some messages in the local storage
+          currentMessages = JSON.parse(window.localStorage.getItem("messages"));
+        }
+
+        let listItems = [];
+        // Create an empty array for listItems
+        for (let i = 0; i < currentMessages.length; i++) {
+          const currentMessage = currentMessages[i];
+
+          let html = `<dt>${currentMessage.fullName} - ${currentMessage.email}</dt>`;
+
+          html += `<dd>${currentMessage.feedbackType} - ${currentMessage.message}</dd>`
+
+          html += "<br />"
+
+          listItems.push(html)
+        }
+
+        // Update the description list
+        var descriptionList = document.getElementById("currentMessages")
+        descriptionList.innerHTML = listItems.join('');
+      }
+
+      // Call renderMessages function on page start
+      renderMessages();
+    </script>
+
+
+  </div>
+
+  <footer>
+    <p style="text-align: center"> Copyright &copy;
+      <script>document.write(new Date().getFullYear())</script> codeHamster All Rights Reserved
+    </p>
+  </footer>
+
+</body>
+
+</html>
