@@ -218,10 +218,25 @@ body {
 }
 
 /* Fake image */
-.fakeimg {
+.blogimg1 {
   background-color: #aaa;
   width: 100%;
   padding: 20px;
+  background-image: url("images/LaptopLogos.png");
+}
+
+.blogimg2 {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+  background-image: url("images/Keyboard.png");
+}
+
+.blogimg3 {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+  background-image: url("images/KeyboardWithCode.png");
 }
 
 /* Add a card effect for articles */
@@ -230,6 +245,7 @@ body {
   padding: 20px;
   margin-top: 20px;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    
 }
 
 /* Clear floats after the columns */
@@ -255,4 +271,20 @@ body {
     width: 100%;
     padding: 0;
   }
+}
+
+#container img {
+  max-width: 250px;
+  max-height: 250px;
+  width: 250px;
+  height: 250px;
+  border: 1px solid #000;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.pad-bottom {
+  padding-bottom:5px ;
 }
